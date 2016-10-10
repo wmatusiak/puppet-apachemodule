@@ -28,7 +28,7 @@ Install mod_remoteip with custom config file
 ```
 
 Install mod_download_token without configuration
-```Pupept
+```Puppet
   apachemodule::install { "download_token":
     gitsource                => "https://github.com/ajakubek/mod_download_token.git",
     runbeforecompile         => '/bin/sed "s/\/usr\/lib\/apache2/\/usr\/share\/apache2/" Makefile > Makefile.new && mv Makefile.new Makefile',
