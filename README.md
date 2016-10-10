@@ -15,8 +15,6 @@ Install mod_remoteip with custom config file
     group   => 'root',
     ensure  => present,
     mode    => 0644,
-    # using RemoteIPInternalProxy instade of RemoteIPTrustedProxy here becouse we use internal addresses on konf ;)
-    # on production RemoteIPTrustedProxy is beter choice
     content => "RemoteIPHeader X-Forwarded-For\nRemoteIPInternalProxy 127.0.0.1",
     require => Apachemodule::Install['remoteip'],
     notify  => Class['apache::service']
