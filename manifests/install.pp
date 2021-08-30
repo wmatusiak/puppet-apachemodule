@@ -28,6 +28,12 @@ define apachemodule::install (
     }
   }
 
+  if ($::operatingsystem == 'Ubuntu' and versioncmp($::operatingsystemrelease, '13.10') >= 0) or ($::operatingsystem == 'Debian' and versioncmp($::operatingsystemrelease, '8') >= 0) {
+    $apache2dev = "apache2-dev"
+  } else {
+    $apache2dev = "apache2-prefork-dev"
+  }
+  
   exec { "${name}_compile":
     command => "/usr/bin/make",
     cwd     => "/usr/src/${name}",
@@ -37,7 +43,7 @@ define apachemodule::install (
       Package['make'],
       Package['libaprutil1-dev'],
       Package['libapr1-dev'],
-      Package['apache2-prefork-dev']
+      Package["${apache2dev}"]
     ]
   }
 
